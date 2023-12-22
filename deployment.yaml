@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  userDatabase:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - authenticationNetwork
+    volumes:
+      - userVolume:/var/lib/mysql
+  authentication:
+    image: authentication
+    ports:
+      - 5000:5000
+    networks:
+      - authenticationNetwork
+  userDBMigration:
+    image: userdatabasemigration
+    networks:
+      - authenticationNetwork
+
+  shopDatabase:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - applicationsNetwork
+    volumes:
+      - shopVolume:/var/lib/mysql
+  owner:
+    image: owner
+    ports:
+      - 5001:5001
+    networks:
+      - applicationsNetwork
+  customer:
+    image: customer
+    ports:
+      - 5002:5002
+    networks:
+      - applicationsNetwork
+  courier:
+    image: courier
+    ports:
+      - 5003:5003
+    networks:
+      - applicationsNetwork
+  shopDBMigration:
+    image: shopmigration
+    networks:
+      - applicationsNetwork
+
+volumes:
+  shopVolume:
+  userVolume:
+
+networks:
+  authenticationNetwork:
+  applicationsNetwork:

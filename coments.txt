@@ -1,0 +1,23 @@
+Pri pokretanju:
+    -pokrenu se svi dockerfile
+    -deployment
+    -pokrene se test
+
+Prilikom pokretanja migraciija:
+    flask --app flasky.py db init
+    flask --app flasky.py db migrate -m "Inital migrations"
+    flask --app flasky.py db upgrade
+
+    -prilikom promene baze radi se samo migrate
+
+Stare komenade za migrate:
+    python manage.py db init
+    python manage.py db migrate -m "Inital migrarion"
+    -upgrade se ne zove
+
+Sve promene u folderima rezultuju ponovnom pozivanju odredjenih .dockerfile
+
+U koliko postoji problema sa web3
+     pip install git+https://github.com/ethereum/web3.py.git
+
+Pre pocetka potrebno je da se instaliraju podrebne biblioteke u interpreteru
